@@ -3,12 +3,18 @@
 import { useState } from "react";
 
 import MenuLink from "./MenuLink";
+import LogoutButton from "../LogoutButton";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignUpModal from "@/app/hooks/useSignUpModal";
 
-const UserNav = () => {
+interface UserNavProps {
+    userId?: string | null;
+}
 
+const UserNav: React.FC <UserNavProps> = ({
+    userId
+}) => {
     const loginModal = useLoginModal();
     const signUpModal = useSignUpModal();
     const [isOpen , setisOpen] = useState(false)
@@ -30,21 +36,27 @@ const UserNav = () => {
 
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border border-gray-200 rounded-xl shadow-md flex flex-col cursor-pointer">
-                    <MenuLink 
-                        label='Log in'
-                        onClick={()=> {
-                            setisOpen(false);
-                            loginModal.open();
-                        }}
-                    />
-
-                    <MenuLink 
-                        label='Sign Up'
-                        onClick={()=> {
-                            setisOpen(false);
-                            signUpModal.open();
-                        }}
-                        />
+                    {userId ? (
+                        <LogoutButton/>
+                    ) : (
+                    <>
+                            <MenuLink 
+                                label='Log in'
+                                onClick={()=> {
+                                    setisOpen(false);
+                                    loginModal.open();
+                                }}
+                            />
+                            <MenuLink 
+                                label='Sign Up'
+                                onClick={()=> {
+                                    setisOpen(false);
+                                    signUpModal.open();
+                                }}
+                            />
+                        </>
+                        )
+                    } 
                 </div>
             )}
         </div>
