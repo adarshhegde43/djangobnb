@@ -2,18 +2,16 @@
 const apiService = {
     get: async (url: string): Promise<any> => {
         const fullUrl = `${process.env.NEXT_PUBLIC_API_HOST}${url}`;
-        console.log('Fetching:', fullUrl);
+        console.log('Full URL:', fullUrl); // 👈 Log the constructed URL
     
         try {
-            const response = await fetch(fullUrl, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-            });
-            return await response.json();
+            const response = await fetch(fullUrl);
+            console.log('Response status:', response.status); // 👈 Log HTTP status
+            const json = await response.json();
+            console.log('API Response:', json); // 👈 Log parsed data
+            return json;
         } catch (error) {
-            console.error('API Error:', error);
+            console.error('API Error:', error); // 👈 Detailed error logging
             throw error;
         }
         }
