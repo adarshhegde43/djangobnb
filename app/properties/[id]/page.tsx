@@ -58,7 +58,7 @@ const PropertyDetailPage = async ({params}: { params: {id: string }}) => {
 
                 <ReservationSideBar 
                     property={property}
-                    // userId={userId}
+                    userId={userId}
                 />
             </div>
         </main>
