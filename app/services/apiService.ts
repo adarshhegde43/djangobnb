@@ -1,41 +1,80 @@
-// app/services/apiService.ts
+import { getAccessToken } from "../lib/actions";
+
 const apiService = {
-    get: async (url: string): Promise<any> => {
-        const fullUrl = `${process.env.NEXT_PUBLIC_API_HOST}${url}`;
-        console.log('GET Request to:', fullUrl);
-    
-        try {
-            const response = await fetch(fullUrl);
-            console.log('Response status:', response.status);
-            const json = await response.json();
-            console.log('API Response:', json);
-            return json;
-        } catch (error) {
-            console.error('GET Error:', error);
-            throw error;
-        }
-        },
-    
-        post: async (url: string, data: any): Promise<any> => {
-            const fullUrl = `${process.env.NEXT_PUBLIC_API_HOST}${url}`;
-            
-            try {
-                const response = await fetch(fullUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                const json = await response.json();
-                return json;
-            } catch (error) {
-                console.error('POST Error (sanitized):', error instanceof Error ? error.message : 'Unknown error');
-                throw error;
-            }
-        }
-    };
-    
-    export default apiService;
+    get: async function (url: string): Promise<any> {
+        console.log('get', url);
+
+        const token = await getAccessToken();
+
+        return new Promise((resolve, reject) => {
+            fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then((json) => {
+                    console.log('Response:', json);
+
+                    resolve(json);
+                })
+                .catch((error => {
+                    reject(error);
+                }))
+        })
+    },
+
+    post: async function(url: string, data: any): Promise<any> {
+        console.log('post', url, data);
+
+        const token = await getAccessToken();
+
+        return new Promise((resolve, reject) => {
+            fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then((json) => {
+                    console.log('Response:', json); 
+
+                    resolve(json);
+                })
+                .catch((error => {
+                    reject(error);
+                }))
+        })
+    },
+
+    postWithoutToken: async function(url: string, data: any): Promise<any> {
+        console.log('post', url, data);
+
+        return new Promise((resolve, reject) => {
+            fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then((json) => {
+                    console.log('Response:', json);
+
+                    resolve(json);
+                })
+                .catch((error => {
+                    reject(error);
+                }))
+        })
+    }
+}
+
+export default apiService;
