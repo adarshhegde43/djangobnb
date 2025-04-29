@@ -42,12 +42,22 @@ const UserNav: React.FC <UserNavProps> = ({
                     {userId ? (
                         <>  
                             <MenuLink
-                                label="My properties"
+                                label="My Properties"
                                 onClick={()=> {
                                     setisOpen(false);
                                     router.push('/myproperties');
                                 }}
                             />
+
+                            <MenuLink
+                                label="My Reservations"
+                                onClick={()=> {
+                                    setisOpen(false);
+                                    router.push('/myreservations');
+                                }}
+                            />
+
+
                         
                             <LogoutButton/>
                         </>
