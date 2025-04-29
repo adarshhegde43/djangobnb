@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import MenuLink from "./MenuLink";
@@ -18,6 +19,8 @@ const UserNav: React.FC <UserNavProps> = ({
     const loginModal = useLoginModal();
     const signUpModal = useSignUpModal();
     const [isOpen , setisOpen] = useState(false)
+
+    const router = useRouter();
     return (
         <div className="p-2 relative inline-block border rounded-full">
             <button 
@@ -37,7 +40,17 @@ const UserNav: React.FC <UserNavProps> = ({
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border border-gray-200 rounded-xl shadow-md flex flex-col cursor-pointer">
                     {userId ? (
-                        <LogoutButton/>
+                        <>  
+                            <MenuLink
+                                label="My properties"
+                                onClick={()=> {
+                                    setisOpen(false);
+                                    router.push('/myproperties');
+                                }}
+                            />
+                        
+                            <LogoutButton/>
+                        </>
                     ) : (
                     <>
                             <MenuLink 
