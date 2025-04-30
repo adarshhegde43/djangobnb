@@ -14,7 +14,7 @@ const PropertyDetailPage = async ({ params }: { params: Promise<{ id: string }> 
     console.log('userId', userId);
 
     return (
-        <main className="max-w-[1500px] mx-auto px-6 pb-6">
+        <main className="max-w-[2500px] mx-auto px-6 pb-6">
             <div className="w-full h-[64vh] mb-4 overflow-hidden rounded-xl relative">
                 <Image
                     fill

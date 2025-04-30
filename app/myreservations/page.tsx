@@ -8,7 +8,7 @@ const MyReservationsPage = async () => {
 
         if (!Array.isArray(reservations)) {
             return (
-                <main className="max-w-[1500px] mx-auto px-6 pb-6">
+                <main className="max-w-[2500px] mx-auto px-6 pb-6">
                     <h1 className="my-6 text-2xl">My reservations</h1>
                     <p>No reservations found or there was an error loading your reservations.</p>
                 </main>
@@ -16,7 +16,7 @@ const MyReservationsPage = async () => {
         }
 
         return (
-            <main className="max-w-[1500px] mx-auto px-6 pb-6">
+            <main className="max-w-[2500px] mx-auto px-6 pb-6">
                 <h1 className="my-6 text-2xl">My reservations</h1>
 
                 <div className="space-y-4">
@@ -58,7 +58,7 @@ const MyReservationsPage = async () => {
         );
     } catch (error) {
         return (
-            <main className="max-w-[1500px] mx-auto px-6 pb-6">
+            <main className="max-w-[2500px] mx-auto px-6 pb-6">
                 <h1 className="my-6 text-2xl">My reservations</h1>
                 <p className="text-red-500">Error loading reservations. Please try again later.</p>
             </main>

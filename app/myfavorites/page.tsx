@@ -6,14 +6,14 @@ const MyFavoritesPage = async() => {
 
     if (!userId) { //if user isn't authenticated....
         return (
-            <main className="max-w-[1500px] max-auto px-6 py-12 ">
+            <main className="max-w-[2500px] max-auto px-6 py-12 ">
                 <p>You need to be authenticated....</p>
             </main>
         )
     }
 
     return ( //if user is authenticated.... show them the page...
-        <main className="max-w-[1500px] max-auto px-6 pb-12 ">
+        <main className="max-w-[2500px] max-auto px-6 pb-12 ">
                 <h1 className="my-6 text-2xl">
                     My favorites...
                 </h1>

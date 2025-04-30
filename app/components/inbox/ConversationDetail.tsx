@@ -11,7 +11,7 @@ interface ConversationDetailProps {
     token: string;
     userId: string;
     conversation?: ConversationType;
-    messages?: MessageType[];   
+    messages?: MessageType[];
 }
 
 const ConversationDetail: React.FC<ConversationDetailProps> = ({
@@ -127,12 +127,12 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                         placeholder="Type your message..."
-                        className="flex-1 p-2 border border-gray-300 rounded-lg"
+                        className="w-full flex-1 p-2 border border-gray-300 rounded-xl"
                     />
                     <CustomButton 
                         label="Send"
                         onClick={sendMessage}
-                        className="w-24"
+                        className="w-2 py-2 text-sm"
                     />
                 </div>
             </div>

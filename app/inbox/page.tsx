@@ -20,7 +20,7 @@ const InboxPage = async () => {
 
     if (!userId) { //if user isn't authenticated....
         return (
-            <main className="max-w-[1500px] max-auto px-6 py-12 ">
+            <main className="max-w-[2500px] max-auto px-6 py-12 ">
                 <p>You need to be authenticated....</p>
             </main>
         )
