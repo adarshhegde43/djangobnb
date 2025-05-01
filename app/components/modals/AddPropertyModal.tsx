@@ -106,8 +106,8 @@ const AddPropertyModal = () => {
                     <h2 className='mb-6 text-2xl'>Choose category</h2>
 
                     <Categories
-                        dataCategory={dataCategory}
-                        setCategory={(category) => setCategory(category)}
+                        selectedCategory={dataCategory}
+                        onCategoryChange={(category) => setCategory(category)}
                     />
 
                     <CustomButton
