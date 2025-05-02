@@ -4,6 +4,7 @@ import apiService from "@/app/services/apiService";
 import ConversationDetail from "@/app/components/inbox/ConversationDetail";
 import { UserType } from "../page";
 import { getAccessToken } from "../../lib/actions";
+import { GetServerSideProps, NextPage } from 'next';
 
 export type MessageType = {
     id: string;
@@ -14,7 +15,13 @@ export type MessageType = {
     created_by: UserType
 }
 
-const ConversationPage = async ({ params }: { params: {id: string }}) => {
+interface ConversationPageProps {
+    params: {
+        id: string;
+    };
+}
+
+const ConversationPage = async ({ params }: ConversationPageProps) => {
     const userId = await getUserID();
     const token = await getAccessToken();
 
