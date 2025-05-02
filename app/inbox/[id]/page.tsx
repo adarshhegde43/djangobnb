@@ -15,16 +15,16 @@ export type MessageType = {
     created_by: UserType;
 }
 
-// Metadata generation (params remains synchronous here)
+// Metadata generation (synchronous params)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
     return {
         title: `Conversation ${params.id}`,
     };
 }
 
-// Main page component with async params
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+// Main page component (synchronous params)
+export default async function Page({ params }: { params: { id: string } }) {
+    const { id } = params;
     
     const userId = await getUserID();
     const token = await getAccessToken();
