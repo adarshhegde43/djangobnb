@@ -1,5 +1,6 @@
 import PropertyList from "../components/properties/PropertyList";
 import { getUserID } from "../lib/actions"; //becuase we only want aunthenticated users to access my favorites page...
+import { Suspense } from "react";
 
 const MyFavoritesPage = async() => {
     const userId = await getUserID();
@@ -19,9 +20,11 @@ const MyFavoritesPage = async() => {
                 </h1>
                 
                 <div className=" grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <PropertyList
+                    <Suspense fallback={<div>Loading properties...</div>}>
+                        <PropertyList
                         favorites={true}
-                    />
+                        />
+                    </Suspense>
                 </div>
         </main>
     )

@@ -3,6 +3,7 @@ import ContactButton from "@/app/components/ContactButton";
 import PropertyList from "@/app/components/properties/PropertyList";
 import apiService from "@/app/services/apiService";
 import { getUserID } from "@/app/lib/actions";
+import { Suspense } from "react";
 
 // Define PageProps with async params
 interface PageProps {
@@ -42,7 +43,9 @@ const LandlordDetailPage = async ({ params }: PageProps) => {
 
                 <div className="col-span-1 md:col-span-3 pl-0 md:pl-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <Suspense fallback={<div>Loading properties...</div>}>
                         <PropertyList landlord_id={id} />
+                    </Suspense>
                     </div>
                 </div>
             </div>
