@@ -27,7 +27,7 @@ export async function handleRefresh() {
 
                 cookieStore.set('session_access_token', json.access,  {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
+                    secure: false,
                     maxAge: 60 * 60, // 60 minutes
                     path: '/'
                 });
@@ -58,7 +58,7 @@ export async function handleLogin(
     // Set user ID cookie (7 days)
     cookieStore.set('session_userid', userId, {
         httpOnly: true,
-        secure: isProduction,
+        secure: false,
         sameSite: 'strict',
         maxAge: 60 * 60 * 24 * 7,  // 7 days
         path: '/',
@@ -67,7 +67,7 @@ export async function handleLogin(
     // Set access token cookie (1 hour)
     cookieStore.set('session_access_token', accessToken, {
         httpOnly: true,
-        secure: isProduction,
+        secure: false,
         sameSite: 'strict',
         maxAge: 60 * 60,  // 1 hour
         path: '/',
@@ -76,7 +76,7 @@ export async function handleLogin(
     // Set refresh token cookie (7 days)
     cookieStore.set('session_refresh_token', refreshToken, {
         httpOnly: true,
-        secure: isProduction,
+        secure: false,
         sameSite: 'strict',
         maxAge: 60 * 60 * 24 * 7,  // 7 days
         path: '/',
