@@ -15,13 +15,17 @@ export type MessageType = {
     created_by: UserType;
 }
 
+// Metadata generation (params remains synchronous here)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
     return {
         title: `Conversation ${params.id}`,
     };
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+// Main page component with async params
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    
     const userId = await getUserID();
     const token = await getAccessToken();
 
@@ -33,7 +37,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         )
     }
 
-    const conversation = await apiService.get(`/api/chat/${params.id}/`);
+    const conversation = await apiService.get(`/api/chat/${id}/`);
 
     return (
         <main className="max-w-[2500px] mx-auto px-6 pb-6">
