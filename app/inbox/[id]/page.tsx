@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 }
 
 // Main page component (synchronous params)
-export default async function Page({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+    const { id } = await props.params;
     
     const userId = await getUserID();
     const token = await getAccessToken();
