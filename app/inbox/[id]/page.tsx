@@ -15,17 +15,21 @@ export type MessageType = {
     created_by: UserType;
 }
 
-// Metadata generation (synchronous params - remains unchanged)
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+// Metadata generation remains synchronous
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const { id } = await params;
     return {
-        title: `Conversation ${params.id}`,
+        title: `Conversation ${id}`,
     };
 }
 
-// Main page component with proper async params handling
-export default async function Page(props: { params: { id: string } }) {
-    // Destructure normally since Next.js 15 actually provides concrete params
-    const { id } = props.params;
+// Main page component with proper typing
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
+
+export default async function Page({ params }: PageProps) {
+    const { id } = await params;
     
     const userId = await getUserID();
     const token = await getAccessToken();
