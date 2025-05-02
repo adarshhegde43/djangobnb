@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     };
 }
 
-export default async function ConversationPage({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
     const userId = await getUserID();
     const token = await getAccessToken();
 
