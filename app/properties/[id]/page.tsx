@@ -5,7 +5,12 @@ import ReservationSideBar from "@/app/components/properties/ReservationSideBar";
 import apiService from "@/app/services/apiService";
 import { getUserID } from "@/app/lib/actions";
 
-const PropertyDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+// Interface for async params
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
+
+const PropertyDetailPage = async ({ params }: PageProps) => {
     const { id } = await params;
 
     const property = await apiService.get(`/api/properties/${id}`);
@@ -44,7 +49,7 @@ const PropertyDetailPage = async ({ params }: { params: Promise<{ id: string }> 
                                 width={50}
                                 height={50}
                                 className="rounded-full"
-                                alt="The user name"
+                                alt="Landlord avatar"
                             />
                         )}
 
